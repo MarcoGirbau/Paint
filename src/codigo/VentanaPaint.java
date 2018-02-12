@@ -20,6 +20,7 @@ public class VentanaPaint extends javax.swing.JFrame {
     BufferedImage buffer, buffer2 = null;
     Circulo circulo;
     Cuadrado cuadrado;
+    Triangulo triangulo;
     Color colorSeleccionado = Color.BLACK;
     int formaSeleccionada = 0;  //Si vale 0 pinto circulos
                                 //Si vale 1 pinto cuadrados
@@ -81,6 +82,7 @@ public class VentanaPaint extends javax.swing.JFrame {
         jToggleButton1 = new javax.swing.JToggleButton();
         jToggleButton2 = new javax.swing.JToggleButton();
         jToggleButton3 = new javax.swing.JToggleButton();
+        jToggleButton4 = new javax.swing.JToggleButton();
 
         jButton1.setText("Cancelar");
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -178,6 +180,13 @@ public class VentanaPaint extends javax.swing.JFrame {
 
         jToggleButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/linea.png"))); // NOI18N
 
+        jToggleButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/circulo.png"))); // NOI18N
+        jToggleButton4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jToggleButton4MousePressed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -191,7 +200,8 @@ public class VentanaPaint extends javax.swing.JFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(jToggleButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jToggleButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jToggleButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jToggleButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -213,7 +223,9 @@ public class VentanaPaint extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jToggleButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jToggleButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jToggleButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jToggleButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(62, Short.MAX_VALUE))
         );
 
@@ -231,6 +243,8 @@ public class VentanaPaint extends javax.swing.JFrame {
             break;
             case 1: cuadrado.dibujate(bufferGraphics, evt.getX());
             break;
+            case 2: triangulo.dibujate(bufferGraphics, evt.getY());
+            break;
         }
         repaint(0,0,1,1);
     }//GEN-LAST:event_jPanel1MouseDragged
@@ -242,6 +256,8 @@ public class VentanaPaint extends javax.swing.JFrame {
             case 0: circulo = new Circulo(evt.getX(), evt.getY(), 1, colorSeleccionado, jCheckBox1.isSelected());
             break;
             case 1: cuadrado = new Cuadrado(evt.getX(), evt.getY(), 1, colorSeleccionado, jCheckBox1.isSelected());
+            break;
+            case 2: triangulo = new Triangulo(evt.getX(), evt.getY(), 1, colorSeleccionado, jCheckBox1.isSelected());
             break;
         }
        
@@ -255,6 +271,8 @@ public class VentanaPaint extends javax.swing.JFrame {
             case 0: circulo.dibujate(buffer2Graphics, evt.getX());
             break;
             case 1: cuadrado.dibujate(buffer2Graphics, evt.getX());
+            break;
+            case 2: triangulo.dibujate(buffer2Graphics, evt.getY());
             break;
         }
     }//GEN-LAST:event_jPanel1MouseReleased
@@ -286,6 +304,13 @@ public class VentanaPaint extends javax.swing.JFrame {
         jToggleButton2.setSelected(false);
         jToggleButton3.setSelected(false);
     }//GEN-LAST:event_jToggleButton1MousePressed
+
+    private void jToggleButton4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jToggleButton4MousePressed
+        formaSeleccionada = 2;
+        jToggleButton1.setSelected(false);
+        jToggleButton2.setSelected(false);
+        jToggleButton3.setSelected(false);
+    }//GEN-LAST:event_jToggleButton4MousePressed
 
     /**
      * @param args the command line arguments
@@ -333,5 +358,6 @@ public class VentanaPaint extends javax.swing.JFrame {
     private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JToggleButton jToggleButton2;
     private javax.swing.JToggleButton jToggleButton3;
+    private javax.swing.JToggleButton jToggleButton4;
     // End of variables declaration//GEN-END:variables
 }
