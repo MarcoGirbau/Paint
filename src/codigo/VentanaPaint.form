@@ -122,7 +122,7 @@
                       <Component id="jToggleButton3" min="-2" pref="39" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jToggleButton4" min="-2" pref="39" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jToggleButton5" min="-2" pref="39" max="-2" attributes="0"/>
                   </Group>
               </Group>
