@@ -13,37 +13,11 @@ import java.awt.geom.Rectangle2D;
  *
  * @author xp
  */
-public class Cuadrado extends Rectangle2D.Double
+public class Cuadrado extends Forma
 {
-    public Color color = null;
-    public boolean relleno = false;
-    
-    public Cuadrado (int _posX, int _posY, int _lado, Color _color, boolean _relleno)
+    public Cuadrado (int _posX, int _posY, Color _color, boolean _relleno)
     {
-        super();
-        //guardo coordenadas de inicio del circulo
-        this.x = _posX;
-        this.y = _posY;
-        width = _lado;
-        height = _lado;
-        color = _color;
-        relleno = _relleno;
-    }
-    
-    public void dibujate (Graphics2D g2, int _posX)
-    {
-        //redibujas el cuadrado
-        int lado = Math.abs((int)x - _posX);
-        width = lado;
-        height = lado;
-        g2.setColor(color);
-        if(relleno)
-        {
-            g2.fill(this);
-        }
-        else
-        {
-            g2.draw(this);
-        }
+        //Inicializa el  contrusctor del cuadrado correctamente para que guarde 4 lados
+        super(_posX, _posY, 4, _color, _relleno);
     }
 }

@@ -47,7 +47,7 @@ public class Forma extends Polygon
         }
     }
     //Recalcula la posicion de los vertices en un poligono regular
-    private void calculaVertices (int _radio, double _giro)
+    public void calculaVertices (int _radio, double _giro)
     {
         for(int i = 0; i < npoints; i++)
         {
