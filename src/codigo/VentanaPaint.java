@@ -107,6 +107,7 @@ public class VentanaPaint extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
 
         jButton1.setText("Cancelar");
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -148,6 +149,12 @@ public class VentanaPaint extends javax.swing.JFrame {
                     .addComponent(jButton2))
                 .addContainerGap(35, Short.MAX_VALUE))
         );
+
+        jFileChooser1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jFileChooser1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jDialog2Layout = new javax.swing.GroupLayout(jDialog2.getContentPane());
         jDialog2.getContentPane().setLayout(jDialog2Layout);
@@ -257,6 +264,15 @@ public class VentanaPaint extends javax.swing.JFrame {
             }
         });
         jMenu1.add(jMenuItem1);
+
+        jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_G, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem2.setText("Cargar");
+        jMenuItem2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jMenuItem2MousePressed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem2);
 
         jMenuBar1.add(jMenu1);
 
@@ -413,6 +429,38 @@ public class VentanaPaint extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jMenu1StateChanged
 
+    private void jFileChooser1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFileChooser1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jFileChooser1ActionPerformed
+
+    private void jMenuItem2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem2MousePressed
+        int seleccion = jFileChooser1.showOpenDialog(this);
+        
+        if (seleccion == JFileChooser.APPROVE_OPTION)
+        {
+            //si llego aquí es que el usuario ha pulsado en "guardar" cuando ha salido 
+            //el menú del jFileChooser
+            File fichero = jFileChooser1.getSelectedFile();
+            String nombre = fichero.getName();
+            String extension = nombre.substring(nombre.lastIndexOf('.')+1);
+            BufferedImage imagen = null;
+            if (extension.equalsIgnoreCase("jpg") || extension.equalsIgnoreCase("png"))
+            {
+                try
+                {
+                    imagen = ImageIO.read(fichero);
+                    bufferGraphics.drawImage(imagen, 0, 0, null);
+                    buffer2Graphics.drawImage(imagen, 0, 0, null);
+                    repaint();
+                }
+                catch(IOException e)
+                {
+                    
+                }
+            }
+        }
+    }//GEN-LAST:event_jMenuItem2MousePressed
+
     /**
      * @param args the command line arguments
      */
@@ -460,6 +508,7 @@ public class VentanaPaint extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JToggleButton jToggleButton2;

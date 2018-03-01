@@ -14,13 +14,10 @@ import java.awt.geom.Ellipse2D;
  * @author xp
  */
 public class Circulo extends Forma    
-{
-    public Color color = null;
-    public boolean relleno = false;
-    
+{   
     public Circulo (int _posX, int _posY, Color _color, boolean _relleno)
     {
-        //Inicializa el  contrusctor del triangulo correctamente para que guarde 100 lados
-        super(_posX, _posY, 100, _color, _relleno);
+        //Inicializa el  contrusctor del circulo correctamente para que guarde 100 lados
+        super(_posX, _posY, 5000, _color, _relleno);
     }
 }
