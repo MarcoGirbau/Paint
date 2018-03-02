@@ -1,8 +1,13 @@
 /*
- * 2 botones (Color y forma)
+ * 2 botones (Color y forma) dentro de ellos sus respectivas cosas (Proceso)
+ * Colores de fondo del paint
+ * Tamaño completo adecuado
+ * Boton Jorge
+ * Arreglar guardar figuras
  */
 package codigo;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Graphics;
@@ -30,6 +35,13 @@ public class VentanaPaint extends javax.swing.JFrame {
                                 //Si vale 3 pinto triangulos
                                 //Si vale 5 pinto pentagonos 
     Graphics2D bufferGraphics, buffer2Graphics, jPanelGraphics = null;
+    BasicStroke trazo1 = new BasicStroke(15);
+    BasicStroke trazo2 = new BasicStroke(15,
+                                        BasicStroke.CAP_BUTT,
+                                        BasicStroke.JOIN_MITER, 
+                                        10.0f, 
+                                        new float[]{10.0f}, 
+                                        0.0f);
     /**
      * Creates new form VentanaPaint
      */
@@ -37,7 +49,8 @@ public class VentanaPaint extends javax.swing.JFrame {
         initComponents();
         jLabel1.setBackground(Color.ORANGE);
         inicializaBuffers();
-        jDialog1.setSize(610, 400);
+        jDialog1.setSize(720, 480);
+        jDialog3.setSize(320, 300);
     }
 
     private void inicializaBuffers()
@@ -91,6 +104,7 @@ public class VentanaPaint extends javax.swing.JFrame {
         jColorChooser1 = new javax.swing.JColorChooser();
         CancelBoton1 = new javax.swing.JButton();
         SaveBoton1 = new javax.swing.JButton();
+        GrosorSlider = new javax.swing.JSlider();
         jDialog2 = new javax.swing.JDialog();
         jFileChooser1 = new javax.swing.JFileChooser();
         jDialog3 = new javax.swing.JDialog();
@@ -98,14 +112,14 @@ public class VentanaPaint extends javax.swing.JFrame {
         SaveBoton2 = new javax.swing.JButton();
         CuadradoBoton = new javax.swing.JToggleButton();
         CirculoBoton = new javax.swing.JToggleButton();
-        jToggleButton3 = new javax.swing.JToggleButton();
-        jToggleButton4 = new javax.swing.JToggleButton();
+        LineaBoton = new javax.swing.JToggleButton();
+        TrianguloBoton = new javax.swing.JToggleButton();
         PentagonoBoton = new javax.swing.JToggleButton();
-        jToggleButton6 = new javax.swing.JToggleButton();
-        PentagonoBoton1 = new javax.swing.JToggleButton();
-        PentagonoBoton3 = new javax.swing.JToggleButton();
-        PentagonoBoton4 = new javax.swing.JToggleButton();
-        jCheckBox1 = new javax.swing.JCheckBox();
+        Estrella1 = new javax.swing.JToggleButton();
+        Hexagono = new javax.swing.JToggleButton();
+        Octogono = new javax.swing.JToggleButton();
+        Estrella2 = new javax.swing.JToggleButton();
+        RellenoCheckBox = new javax.swing.JCheckBox();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -113,6 +127,12 @@ public class VentanaPaint extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
+
+        jDialog1.addContainerListener(new java.awt.event.ContainerAdapter() {
+            public void componentAdded(java.awt.event.ContainerEvent evt) {
+                jDialog1ComponentAdded(evt);
+            }
+        });
 
         CancelBoton1.setText("Cancelar");
         CancelBoton1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -133,31 +153,44 @@ public class VentanaPaint extends javax.swing.JFrame {
             }
         });
 
+        GrosorSlider.setOrientation(javax.swing.JSlider.VERTICAL);
+        GrosorSlider.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                GrosorSliderMouseDragged(evt);
+            }
+        });
+
         javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
         jDialog1.getContentPane().setLayout(jDialog1Layout);
         jDialog1Layout.setHorizontalGroup(
             jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDialog1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jColorChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 579, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(18, Short.MAX_VALUE))
-            .addGroup(jDialog1Layout.createSequentialGroup()
-                .addGap(93, 93, 93)
+                .addComponent(jColorChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, 635, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(GrosorSlider, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDialog1Layout.createSequentialGroup()
+                .addGap(110, 110, 110)
                 .addComponent(CancelBoton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(SaveBoton1)
-                .addGap(178, 178, 178))
+                .addGap(161, 161, 161))
         );
         jDialog1Layout.setVerticalGroup(
             jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDialog1Layout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addComponent(GrosorSlider, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(52, 52, 52))
+            .addGroup(jDialog1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jColorChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(jColorChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(CancelBoton1)
                     .addComponent(SaveBoton1))
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jFileChooser1.addActionListener(new java.awt.event.ActionListener() {
@@ -189,11 +222,21 @@ public class VentanaPaint extends javax.swing.JFrame {
                 CancelBoton2MousePressed(evt);
             }
         });
+        CancelBoton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CancelBoton2ActionPerformed(evt);
+            }
+        });
 
         SaveBoton2.setText("Guardar");
         SaveBoton2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 SaveBoton2MousePressed(evt);
+            }
+        });
+        SaveBoton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SaveBoton2ActionPerformed(evt);
             }
         });
 
@@ -211,54 +254,54 @@ public class VentanaPaint extends javax.swing.JFrame {
             }
         });
 
-        jToggleButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/linea.png"))); // NOI18N
+        LineaBoton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/linea.png"))); // NOI18N
 
-        jToggleButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/triangulo.jpg"))); // NOI18N
-        jToggleButton4.addMouseListener(new java.awt.event.MouseAdapter() {
+        TrianguloBoton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/triangulo.png"))); // NOI18N
+        TrianguloBoton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jToggleButton4MousePressed(evt);
+                TrianguloBotonMousePressed(evt);
             }
         });
 
-        PentagonoBoton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/pentagono.jpg"))); // NOI18N
+        PentagonoBoton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/pentagono.png"))); // NOI18N
         PentagonoBoton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 PentagonoBotonMousePressed(evt);
             }
         });
 
-        jToggleButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/linea.png"))); // NOI18N
-        jToggleButton6.addMouseListener(new java.awt.event.MouseAdapter() {
+        Estrella1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/estrella1.png"))); // NOI18N
+        Estrella1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jToggleButton6MousePressed(evt);
+                Estrella1MousePressed(evt);
             }
         });
 
-        PentagonoBoton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/pentagono.jpg"))); // NOI18N
-        PentagonoBoton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        Hexagono.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/hexagono.png"))); // NOI18N
+        Hexagono.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                PentagonoBoton1MousePressed(evt);
+                HexagonoMousePressed(evt);
             }
         });
 
-        PentagonoBoton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/pentagono.jpg"))); // NOI18N
-        PentagonoBoton3.addMouseListener(new java.awt.event.MouseAdapter() {
+        Octogono.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/octagono.png"))); // NOI18N
+        Octogono.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                PentagonoBoton3MousePressed(evt);
+                OctogonoMousePressed(evt);
             }
         });
 
-        PentagonoBoton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/pentagono.jpg"))); // NOI18N
-        PentagonoBoton4.addMouseListener(new java.awt.event.MouseAdapter() {
+        Estrella2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/estrella2.png"))); // NOI18N
+        Estrella2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                PentagonoBoton4MousePressed(evt);
+                Estrella2MousePressed(evt);
             }
         });
 
-        jCheckBox1.setText("relleno");
-        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+        RellenoCheckBox.setText("relleno");
+        RellenoCheckBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox1ActionPerformed(evt);
+                RellenoCheckBoxActionPerformed(evt);
             }
         });
 
@@ -269,31 +312,34 @@ public class VentanaPaint extends javax.swing.JFrame {
             .addGroup(jDialog3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jDialog3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jCheckBox1)
+                    .addComponent(RellenoCheckBox)
                     .addGroup(jDialog3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(CuadradoBoton)
-                        .addComponent(CirculoBoton)
-                        .addComponent(PentagonoBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(41, 41, 41)
+                        .addComponent(CuadradoBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(CirculoBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(PentagonoBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(jDialog3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDialog3Layout.createSequentialGroup()
-                        .addGroup(jDialog3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jToggleButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jToggleButton4)
-                            .addComponent(jToggleButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jDialog3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jDialog3Layout.createSequentialGroup()
-                                .addGap(40, 40, 40)
-                                .addComponent(PentagonoBoton1, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDialog3Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jDialog3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(PentagonoBoton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(PentagonoBoton4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDialog3Layout.createSequentialGroup()
-                        .addComponent(SaveBoton2)
+                    .addGroup(jDialog3Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(CancelBoton2)))
+                        .addComponent(SaveBoton2)
+                        .addGap(28, 28, 28)
+                        .addComponent(CancelBoton2)
+                        .addGap(15, 15, 15))
+                    .addGroup(jDialog3Layout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addGroup(jDialog3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDialog3Layout.createSequentialGroup()
+                                .addComponent(TrianguloBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jDialog3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(Hexagono, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jDialog3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(Octogono, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(Estrella2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(jDialog3Layout.createSequentialGroup()
+                                .addGroup(jDialog3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(Estrella1, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(LineaBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jDialog3Layout.setVerticalGroup(
@@ -303,33 +349,32 @@ public class VentanaPaint extends javax.swing.JFrame {
                 .addGroup(jDialog3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jDialog3Layout.createSequentialGroup()
                         .addGroup(jDialog3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jToggleButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(PentagonoBoton1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(TrianguloBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Hexagono, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jDialog3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jToggleButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(PentagonoBoton3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(Octogono, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(LineaBoton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jDialog3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jToggleButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(PentagonoBoton4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jDialog3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(CancelBoton2)
-                            .addComponent(SaveBoton2)))
+                            .addComponent(Estrella1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Estrella2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jDialog3Layout.createSequentialGroup()
                         .addComponent(CuadradoBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(CirculoBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(PentagonoBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(PentagonoBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jCheckBox1)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addGroup(jDialog3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(RellenoCheckBox)
+                            .addComponent(SaveBoton2)
+                            .addComponent(CancelBoton2))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(153, 0, 51));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -350,11 +395,11 @@ public class VentanaPaint extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 737, Short.MAX_VALUE)
+            .addGap(0, 749, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 485, Short.MAX_VALUE)
         );
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -367,7 +412,7 @@ public class VentanaPaint extends javax.swing.JFrame {
         });
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Color");
+        jLabel2.setText("Formas");
         jLabel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -410,10 +455,10 @@ public class VentanaPaint extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -421,14 +466,14 @@ public class VentanaPaint extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(44, 44, 44)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 144, Short.MAX_VALUE)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39))
         );
 
         pack();
@@ -437,7 +482,8 @@ public class VentanaPaint extends javax.swing.JFrame {
     private void jPanel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseDragged
         
         bufferGraphics.drawImage(buffer2, 0, 0,null);
-        miForma.dibujate(bufferGraphics, evt.getY(),evt.getX());
+        trazo1 = new BasicStroke( GrosorSlider.getValue(),BasicStroke.CAP_BUTT,BasicStroke.JOIN_MITER,10.0f,  new float[]{10.0f},0.0f);
+        miForma.dibujate(bufferGraphics, evt.getY(),evt.getX(),trazo1);
         repaint(0,0,1,1);
     }//GEN-LAST:event_jPanel1MouseDragged
 
@@ -445,22 +491,23 @@ public class VentanaPaint extends javax.swing.JFrame {
         // inicializa la forma que usare para dibujar en el buffer
         switch(formaSeleccionada)
         {
-            case 100: miForma = new Circulo(evt.getX(), evt.getY(), colorSeleccionado, jCheckBox1.isSelected());
+            case 100: miForma = new Circulo(evt.getX(), evt.getY(), colorSeleccionado, RellenoCheckBox.isSelected());
             break;
-            case 1: miForma = new Cuadrado(evt.getX(), evt.getY(), colorSeleccionado, jCheckBox1.isSelected());
+            case 1: miForma = new Cuadrado(evt.getX(), evt.getY(), colorSeleccionado, RellenoCheckBox.isSelected());
             break;
-            case 3: miForma = new Triangulo(evt.getX(), evt.getY(), colorSeleccionado, jCheckBox1.isSelected());
+            case 3: miForma = new Triangulo(evt.getX(), evt.getY(), colorSeleccionado, RellenoCheckBox.isSelected());
             break;
-            case 5: miForma = new Pentagono(evt.getX(), evt.getY(), colorSeleccionado, jCheckBox1.isSelected());
+            case 5: miForma = new Pentagono(evt.getX(), evt.getY(), colorSeleccionado, RellenoCheckBox.isSelected());
             break;
-            case 24: miForma = new Estrella(evt.getX(), evt.getY(), colorSeleccionado, jCheckBox1.isSelected());
+            case 24: miForma = new Estrella(evt.getX(), evt.getY(), colorSeleccionado, RellenoCheckBox.isSelected());
             break;
         }
     }//GEN-LAST:event_jPanel1MousePressed
 
     private void jPanel1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseReleased
         //dibuja la forma correspondiente
-        miForma.dibujate(bufferGraphics, evt.getY(),evt.getX());
+       trazo1 = new BasicStroke( GrosorSlider.getValue(),BasicStroke.CAP_BUTT,BasicStroke.JOIN_MITER,10.0f,  new float[]{10.0f},0.0f);
+       miForma.dibujate(bufferGraphics, evt.getY(),evt.getX(), trazo1);
     }//GEN-LAST:event_jPanel1MouseReleased
 
     private void jLabel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MousePressed
@@ -489,20 +536,20 @@ public class VentanaPaint extends javax.swing.JFrame {
         deSelecciona();
     }//GEN-LAST:event_CuadradoBotonMousePressed
 
-    private void jToggleButton4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jToggleButton4MousePressed
+    private void TrianguloBotonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TrianguloBotonMousePressed
         formaSeleccionada = 3;
         deSelecciona();
-    }//GEN-LAST:event_jToggleButton4MousePressed
+    }//GEN-LAST:event_TrianguloBotonMousePressed
 
     private void PentagonoBotonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PentagonoBotonMousePressed
         formaSeleccionada = 5;
         deSelecciona();
     }//GEN-LAST:event_PentagonoBotonMousePressed
 
-    private void jToggleButton6MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jToggleButton6MousePressed
+    private void Estrella1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Estrella1MousePressed
         formaSeleccionada = 24;
         deSelecciona();
-    }//GEN-LAST:event_jToggleButton6MousePressed
+    }//GEN-LAST:event_Estrella1MousePressed
 
     private void jMenuItem1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem1MousePressed
         int seleccion = jFileChooser1.showSaveDialog(this);
@@ -567,36 +614,52 @@ public class VentanaPaint extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem2MousePressed
 
     private void CancelBoton2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CancelBoton2MousePressed
-        jDialog1.setVisible(false);
+        jDialog3.setVisible(false);
     }//GEN-LAST:event_CancelBoton2MousePressed
 
     private void SaveBoton2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SaveBoton2MousePressed
-        jDialog1.setVisible(false);
+        jDialog3.setVisible(false);
     }//GEN-LAST:event_SaveBoton2MousePressed
 
     private void SaveBoton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveBoton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_SaveBoton1ActionPerformed
 
-    private void PentagonoBoton1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PentagonoBoton1MousePressed
+    private void HexagonoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HexagonoMousePressed
         // TODO add your handling code here:
-    }//GEN-LAST:event_PentagonoBoton1MousePressed
+    }//GEN-LAST:event_HexagonoMousePressed
 
-    private void PentagonoBoton3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PentagonoBoton3MousePressed
+    private void OctogonoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OctogonoMousePressed
         // TODO add your handling code here:
-    }//GEN-LAST:event_PentagonoBoton3MousePressed
+    }//GEN-LAST:event_OctogonoMousePressed
 
-    private void PentagonoBoton4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PentagonoBoton4MousePressed
+    private void Estrella2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Estrella2MousePressed
         // TODO add your handling code here:
-    }//GEN-LAST:event_PentagonoBoton4MousePressed
+    }//GEN-LAST:event_Estrella2MousePressed
 
     private void jLabel2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MousePressed
-        // TODO add your handling code here:
+        jDialog3.setVisible(true);
     }//GEN-LAST:event_jLabel2MousePressed
 
-    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+    private void RellenoCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RellenoCheckBoxActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox1ActionPerformed
+    }//GEN-LAST:event_RellenoCheckBoxActionPerformed
+
+    private void GrosorSliderMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_GrosorSliderMouseDragged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_GrosorSliderMouseDragged
+
+    private void SaveBoton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveBoton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_SaveBoton2ActionPerformed
+
+    private void CancelBoton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelBoton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CancelBoton2ActionPerformed
+
+    private void jDialog1ComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_jDialog1ComponentAdded
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jDialog1ComponentAdded
 
     /**
      * @param args the command line arguments
@@ -638,13 +701,17 @@ public class VentanaPaint extends javax.swing.JFrame {
     private javax.swing.JButton CancelBoton2;
     private javax.swing.JToggleButton CirculoBoton;
     private javax.swing.JToggleButton CuadradoBoton;
+    private javax.swing.JToggleButton Estrella1;
+    private javax.swing.JToggleButton Estrella2;
+    private javax.swing.JSlider GrosorSlider;
+    private javax.swing.JToggleButton Hexagono;
+    private javax.swing.JToggleButton LineaBoton;
+    private javax.swing.JToggleButton Octogono;
     private javax.swing.JToggleButton PentagonoBoton;
-    private javax.swing.JToggleButton PentagonoBoton1;
-    private javax.swing.JToggleButton PentagonoBoton3;
-    private javax.swing.JToggleButton PentagonoBoton4;
+    private javax.swing.JCheckBox RellenoCheckBox;
     private javax.swing.JButton SaveBoton1;
     private javax.swing.JButton SaveBoton2;
-    private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JToggleButton TrianguloBoton;
     private javax.swing.JColorChooser jColorChooser1;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JDialog jDialog2;
@@ -657,8 +724,5 @@ public class VentanaPaint extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JToggleButton jToggleButton3;
-    private javax.swing.JToggleButton jToggleButton4;
-    private javax.swing.JToggleButton jToggleButton6;
     // End of variables declaration//GEN-END:variables
 }
