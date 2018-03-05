@@ -1,9 +1,9 @@
 /*
  * 2 botones (Color y forma) dentro de ellos sus respectivas cosas (Proceso)
  * Colores de fondo del paint
- * Tamaño completo adecuado
+ * Tamaño completo adecuado (Hecho)
  * Boton Jorge
- * Arreglar guardar figuras
+ * Arreglar guardar figuras(Hecho)
  */
 package codigo;
 
@@ -374,7 +374,10 @@ public class VentanaPaint extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setBackground(new java.awt.Color(153, 0, 51));
+        setBackground(new java.awt.Color(255, 255, 255));
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setForeground(new java.awt.Color(255, 255, 255));
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -626,15 +629,15 @@ public class VentanaPaint extends javax.swing.JFrame {
     }//GEN-LAST:event_SaveBoton1ActionPerformed
 
     private void HexagonoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HexagonoMousePressed
-        // TODO add your handling code here:
+        deSelecciona();
     }//GEN-LAST:event_HexagonoMousePressed
 
     private void OctogonoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OctogonoMousePressed
-        // TODO add your handling code here:
+        deSelecciona();
     }//GEN-LAST:event_OctogonoMousePressed
 
     private void Estrella2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Estrella2MousePressed
-        // TODO add your handling code here:
+        deSelecciona();
     }//GEN-LAST:event_Estrella2MousePressed
 
     private void jLabel2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MousePressed
