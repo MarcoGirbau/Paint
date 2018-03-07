@@ -69,6 +69,7 @@
         <Component class="javax.swing.JSlider" name="GrosorSlider">
           <Properties>
             <Property name="orientation" type="int" value="1"/>
+            <Property name="value" type="int" value="5"/>
           </Properties>
           <Events>
             <EventHandler event="mouseDragged" listener="java.awt.event.MouseMotionListener" parameters="java.awt.event.MouseEvent" handler="GrosorSliderMouseDragged"/>
@@ -242,6 +243,9 @@
               <Image iconType="3" name="/imagenes/linea.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="LineaBotonActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JToggleButton" name="TrianguloBoton">
           <Properties>
@@ -281,6 +285,7 @@
           </Properties>
           <Events>
             <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="HexagonoMousePressed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="HexagonoActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JToggleButton" name="Octogono">
@@ -291,6 +296,7 @@
           </Properties>
           <Events>
             <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="OctogonoMousePressed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="OctogonoActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JToggleButton" name="Estrella2">
@@ -301,6 +307,7 @@
           </Properties>
           <Events>
             <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="Estrella2MousePressed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Estrella2ActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JCheckBox" name="RellenoCheckBox">

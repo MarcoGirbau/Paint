@@ -9,12 +9,12 @@ import java.awt.Color;
  *
  * @author Marco Girbau
  */
-public class Estrella extends Forma
+public class Estrella2 extends Forma
 {
-    public Estrella (int _posX, int _posY, Color _color, boolean _relleno)
+    public Estrella2 (int _posX, int _posY, Color _color, boolean _relleno)
     {
         //Inicializa el  contrusctor del triangulo correctamente para que guarde 3 lados
-        super(_posX, _posY, 120, _color, _relleno);
+        super(_posX, _posY, 240, _color, _relleno);
     }
     @Override
     public void calculaVertices(int _radio, double _giro)

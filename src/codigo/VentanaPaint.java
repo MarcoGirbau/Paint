@@ -4,6 +4,7 @@
  * Tamaño completo adecuado (Hecho)
  * Boton Jorge
  * Arreglar guardar figuras(Hecho)
+ * Seleccionado de las formas arreglar
  */
 package codigo;
 
@@ -34,6 +35,11 @@ public class VentanaPaint extends javax.swing.JFrame {
                                 //Si vale 1 pinto cuadrados
                                 //Si vale 3 pinto triangulos
                                 //Si vale 5 pinto pentagonos 
+                                //Si vale 2 pinto linea
+                                //Si vale 6 pinto hexagono
+                                //Si vale 8 pinto octogono
+                                //Si vale 24 pinta estrellas normales
+                                //Si vale 12 pinta segundo tipo de estrellas
     Graphics2D bufferGraphics, buffer2Graphics, jPanelGraphics = null;
     BasicStroke trazo1 = new BasicStroke(15);
     BasicStroke trazo2 = new BasicStroke(15,
@@ -154,6 +160,7 @@ public class VentanaPaint extends javax.swing.JFrame {
         });
 
         GrosorSlider.setOrientation(javax.swing.JSlider.VERTICAL);
+        GrosorSlider.setValue(5);
         GrosorSlider.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 GrosorSliderMouseDragged(evt);
@@ -255,6 +262,11 @@ public class VentanaPaint extends javax.swing.JFrame {
         });
 
         LineaBoton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/linea.png"))); // NOI18N
+        LineaBoton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LineaBotonActionPerformed(evt);
+            }
+        });
 
         TrianguloBoton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/triangulo.png"))); // NOI18N
         TrianguloBoton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -283,6 +295,11 @@ public class VentanaPaint extends javax.swing.JFrame {
                 HexagonoMousePressed(evt);
             }
         });
+        Hexagono.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                HexagonoActionPerformed(evt);
+            }
+        });
 
         Octogono.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/octagono.png"))); // NOI18N
         Octogono.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -290,11 +307,21 @@ public class VentanaPaint extends javax.swing.JFrame {
                 OctogonoMousePressed(evt);
             }
         });
+        Octogono.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                OctogonoActionPerformed(evt);
+            }
+        });
 
         Estrella2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/estrella2.png"))); // NOI18N
         Estrella2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 Estrella2MousePressed(evt);
+            }
+        });
+        Estrella2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Estrella2ActionPerformed(evt);
             }
         });
 
@@ -504,6 +531,14 @@ public class VentanaPaint extends javax.swing.JFrame {
             break;
             case 24: miForma = new Estrella(evt.getX(), evt.getY(), colorSeleccionado, RellenoCheckBox.isSelected());
             break;
+            case 2: miForma = new Linea(evt.getX(), evt.getY(), colorSeleccionado, RellenoCheckBox.isSelected());
+            break;
+            case 6: miForma = new Hexagono(evt.getX(), evt.getY(), colorSeleccionado, RellenoCheckBox.isSelected());
+            break;
+            case 8: miForma = new Octogono(evt.getX(), evt.getY(), colorSeleccionado, RellenoCheckBox.isSelected());
+            break;
+            case 12: miForma = new Estrella2(evt.getX(), evt.getY(), colorSeleccionado, RellenoCheckBox.isSelected());
+            break;
         }
     }//GEN-LAST:event_jPanel1MousePressed
 
@@ -663,6 +698,26 @@ public class VentanaPaint extends javax.swing.JFrame {
     private void jDialog1ComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_jDialog1ComponentAdded
         // TODO add your handling code here:
     }//GEN-LAST:event_jDialog1ComponentAdded
+
+    private void LineaBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LineaBotonActionPerformed
+        formaSeleccionada = 2;
+        deSelecciona();
+    }//GEN-LAST:event_LineaBotonActionPerformed
+
+    private void HexagonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HexagonoActionPerformed
+        formaSeleccionada = 6;
+        deSelecciona();
+    }//GEN-LAST:event_HexagonoActionPerformed
+
+    private void OctogonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OctogonoActionPerformed
+        formaSeleccionada = 8;
+        deSelecciona();
+    }//GEN-LAST:event_OctogonoActionPerformed
+
+    private void Estrella2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Estrella2ActionPerformed
+        formaSeleccionada = 12;
+        deSelecciona();
+    }//GEN-LAST:event_Estrella2ActionPerformed
 
     /**
      * @param args the command line arguments
