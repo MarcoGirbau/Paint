@@ -89,7 +89,7 @@ public class VentanaPaint extends javax.swing.JFrame {
     
     public void deSelecciona()
      {
-        Component[] components = (Component[]) getContentPane().getComponents();
+        Component[] components = (Component[]) jDialog3.getContentPane().getComponents();
         for (Component comp : components) {
             if (comp instanceof JToggleButton) {
                 ((JToggleButton)comp).setSelected(false);
@@ -125,7 +125,7 @@ public class VentanaPaint extends javax.swing.JFrame {
         Octogono = new javax.swing.JToggleButton();
         Estrella2 = new javax.swing.JToggleButton();
         RellenoCheckBox = new javax.swing.JCheckBox();
-        RellenoCheckBox1 = new javax.swing.JCheckBox();
+        RayadoCheckBox = new javax.swing.JCheckBox();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -265,9 +265,9 @@ public class VentanaPaint extends javax.swing.JFrame {
         });
 
         LineaBoton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/linea.png"))); // NOI18N
-        LineaBoton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                LineaBotonActionPerformed(evt);
+        LineaBoton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                LineaBotonMousePressed(evt);
             }
         });
 
@@ -298,11 +298,6 @@ public class VentanaPaint extends javax.swing.JFrame {
                 HexagonoMousePressed(evt);
             }
         });
-        Hexagono.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                HexagonoActionPerformed(evt);
-            }
-        });
 
         Octogono.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/octagono.png"))); // NOI18N
         Octogono.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -310,21 +305,11 @@ public class VentanaPaint extends javax.swing.JFrame {
                 OctogonoMousePressed(evt);
             }
         });
-        Octogono.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                OctogonoActionPerformed(evt);
-            }
-        });
 
         Estrella2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/estrella2.png"))); // NOI18N
         Estrella2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 Estrella2MousePressed(evt);
-            }
-        });
-        Estrella2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Estrella2ActionPerformed(evt);
             }
         });
 
@@ -335,10 +320,10 @@ public class VentanaPaint extends javax.swing.JFrame {
             }
         });
 
-        RellenoCheckBox1.setText("Rayado");
-        RellenoCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+        RayadoCheckBox.setText("Rayado");
+        RayadoCheckBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RellenoCheckBox1ActionPerformed(evt);
+                RayadoCheckBoxActionPerformed(evt);
             }
         });
 
@@ -353,29 +338,33 @@ public class VentanaPaint extends javax.swing.JFrame {
                     .addComponent(CirculoBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(PentagonoBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jDialog3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(RellenoCheckBox1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(RayadoCheckBox, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(RellenoCheckBox, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(jDialog3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jDialog3Layout.createSequentialGroup()
                         .addGap(36, 36, 36)
-                        .addComponent(SaveBoton2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(CancelBoton2))
-                    .addGroup(jDialog3Layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
                         .addGroup(jDialog3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDialog3Layout.createSequentialGroup()
-                                .addComponent(TrianguloBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
-                                .addComponent(Hexagono, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jDialog3Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(Estrella2, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jDialog3Layout.createSequentialGroup()
+                                .addGroup(jDialog3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(TrianguloBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(SaveBoton2))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                                .addGroup(jDialog3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(CancelBoton2, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(Hexagono, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(jDialog3Layout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addGroup(jDialog3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jDialog3Layout.createSequentialGroup()
+                                .addComponent(Estrella1, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(jDialog3Layout.createSequentialGroup()
                                 .addComponent(LineaBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(Octogono, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jDialog3Layout.createSequentialGroup()
-                                .addComponent(Estrella1, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(Estrella2, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(Octogono, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jDialog3Layout.setVerticalGroup(
@@ -392,7 +381,7 @@ public class VentanaPaint extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(RellenoCheckBox)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
-                        .addComponent(RellenoCheckBox1)
+                        .addComponent(RayadoCheckBox)
                         .addContainerGap())
                     .addGroup(jDialog3Layout.createSequentialGroup()
                         .addGroup(jDialog3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -540,7 +529,7 @@ public class VentanaPaint extends javax.swing.JFrame {
     private void jPanel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseDragged
         
         bufferGraphics.drawImage(buffer2, 0, 0,null);
-        if(RellenoCheckBox1.isSelected())
+        if(RayadoCheckBox.isSelected())
         {
             trazo1 = new BasicStroke(GrosorSlider.getValue(),BasicStroke.CAP_BUTT,BasicStroke.JOIN_MITER,10.0f,  new float[]{10.0f},0.0f);
         }
@@ -579,7 +568,7 @@ public class VentanaPaint extends javax.swing.JFrame {
 
     private void jPanel1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseReleased
         //dibuja la forma correspondiente
-      if(RellenoCheckBox1.isSelected())
+      if(RayadoCheckBox.isSelected())
         {
             trazo1 = new BasicStroke(GrosorSlider.getValue(),BasicStroke.CAP_BUTT,BasicStroke.JOIN_MITER,10.0f,  new float[]{10.0f},0.0f);
         }
@@ -706,14 +695,17 @@ public class VentanaPaint extends javax.swing.JFrame {
     }//GEN-LAST:event_SaveBoton1ActionPerformed
 
     private void HexagonoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HexagonoMousePressed
+        formaSeleccionada = 6;
         deSelecciona();
     }//GEN-LAST:event_HexagonoMousePressed
 
     private void OctogonoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OctogonoMousePressed
+        formaSeleccionada = 8;
         deSelecciona();
     }//GEN-LAST:event_OctogonoMousePressed
 
     private void Estrella2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Estrella2MousePressed
+        formaSeleccionada = 12;
         deSelecciona();
     }//GEN-LAST:event_Estrella2MousePressed
 
@@ -741,26 +733,6 @@ public class VentanaPaint extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jDialog1ComponentAdded
 
-    private void LineaBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LineaBotonActionPerformed
-        formaSeleccionada = 2;
-        deSelecciona();
-    }//GEN-LAST:event_LineaBotonActionPerformed
-
-    private void HexagonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HexagonoActionPerformed
-        formaSeleccionada = 6;
-        deSelecciona();
-    }//GEN-LAST:event_HexagonoActionPerformed
-
-    private void OctogonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OctogonoActionPerformed
-        formaSeleccionada = 8;
-        deSelecciona();
-    }//GEN-LAST:event_OctogonoActionPerformed
-
-    private void Estrella2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Estrella2ActionPerformed
-        formaSeleccionada = 12;
-        deSelecciona();
-    }//GEN-LAST:event_Estrella2ActionPerformed
-
     private void JorgePincelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JorgePincelMousePressed
         // TODO add your handling code here:
     }//GEN-LAST:event_JorgePincelMousePressed
@@ -769,9 +741,14 @@ public class VentanaPaint extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_JorgePincelActionPerformed
 
-    private void RellenoCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RellenoCheckBox1ActionPerformed
+    private void RayadoCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RayadoCheckBoxActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_RellenoCheckBox1ActionPerformed
+    }//GEN-LAST:event_RayadoCheckBoxActionPerformed
+
+    private void LineaBotonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LineaBotonMousePressed
+        formaSeleccionada = 2;
+        deSelecciona();
+    }//GEN-LAST:event_LineaBotonMousePressed
 
     /**
      * @param args the command line arguments
@@ -821,8 +798,8 @@ public class VentanaPaint extends javax.swing.JFrame {
     private javax.swing.JToggleButton LineaBoton;
     private javax.swing.JToggleButton Octogono;
     private javax.swing.JToggleButton PentagonoBoton;
+    private javax.swing.JCheckBox RayadoCheckBox;
     private javax.swing.JCheckBox RellenoCheckBox;
-    private javax.swing.JCheckBox RellenoCheckBox1;
     private javax.swing.JButton SaveBoton1;
     private javax.swing.JButton SaveBoton2;
     private javax.swing.JToggleButton TrianguloBoton;
