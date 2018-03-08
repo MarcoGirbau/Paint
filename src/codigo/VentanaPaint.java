@@ -134,6 +134,7 @@ public class VentanaPaint extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         JorgePincel = new javax.swing.JToggleButton();
+        JorgeGoma = new javax.swing.JToggleButton();
         MenuBar1 = new javax.swing.JMenuBar();
         MenuFile = new javax.swing.JMenu();
         MenuItemGuardar = new javax.swing.JMenuItem();
@@ -435,7 +436,7 @@ public class VentanaPaint extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 709, Short.MAX_VALUE)
+            .addGap(0, 712, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -464,6 +465,13 @@ public class VentanaPaint extends javax.swing.JFrame {
         JorgePincel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 JorgePincelMousePressed(evt);
+            }
+        });
+
+        JorgeGoma.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/JorgeCisnerosGoma.jpg"))); // NOI18N
+        JorgeGoma.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                JorgeGomaMousePressed(evt);
             }
         });
 
@@ -502,11 +510,13 @@ public class VentanaPaint extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(JorgePincel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(JorgePincel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(JorgeGoma, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -515,16 +525,17 @@ public class VentanaPaint extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
                         .addComponent(JorgePincel, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(57, 57, 57))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(JorgeGoma, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
 
         pack();
@@ -540,6 +551,19 @@ public class VentanaPaint extends javax.swing.JFrame {
             if(cancer != campoDeAlgodon || sida != Amigorio)
             {
                 bufferGraphics.setColor(colorSeleccionado);
+                bufferGraphics.drawLine(cancer, sida, campoDeAlgodon, Amigorio);
+                buffer2Graphics.setColor(colorSeleccionado);
+                buffer2Graphics.drawLine(cancer, sida, campoDeAlgodon, Amigorio);
+                cancer = campoDeAlgodon;
+                sida = Amigorio;
+            }
+            break;
+            case 46: 
+            campoDeAlgodon = evt.getX();
+            Amigorio = evt.getY();
+            if(cancer != campoDeAlgodon || sida != Amigorio)
+            {
+                bufferGraphics.setColor(Color.WHITE);
                 bufferGraphics.drawLine(cancer, sida, campoDeAlgodon, Amigorio);
                 buffer2Graphics.setColor(colorSeleccionado);
                 buffer2Graphics.drawLine(cancer, sida, campoDeAlgodon, Amigorio);
@@ -590,6 +614,19 @@ public class VentanaPaint extends javax.swing.JFrame {
             if(cancer != campoDeAlgodon || sida != Amigorio)
             {
                 bufferGraphics.setColor(colorSeleccionado);
+                bufferGraphics.drawLine(cancer, sida, campoDeAlgodon, Amigorio);
+                buffer2Graphics.setColor(colorSeleccionado);
+                buffer2Graphics.drawLine(cancer, sida, campoDeAlgodon, Amigorio);
+                cancer = campoDeAlgodon;
+                sida = Amigorio;
+            }
+            break;
+            case 46: 
+            campoDeAlgodon = evt.getX();
+            Amigorio = evt.getY();
+            if(cancer != campoDeAlgodon || sida != Amigorio)
+            {
+                bufferGraphics.setColor(Color.WHITE);
                 bufferGraphics.drawLine(cancer, sida, campoDeAlgodon, Amigorio);
                 buffer2Graphics.setColor(colorSeleccionado);
                 buffer2Graphics.drawLine(cancer, sida, campoDeAlgodon, Amigorio);
@@ -781,6 +818,11 @@ public class VentanaPaint extends javax.swing.JFrame {
         deSelecciona();
     }//GEN-LAST:event_LineaBotonMousePressed
 
+    private void JorgeGomaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JorgeGomaMousePressed
+        formaSeleccionada = 46;
+        deSelecciona();
+    }//GEN-LAST:event_JorgeGomaMousePressed
+
     /**
      * @param args the command line arguments
      */
@@ -827,6 +869,7 @@ public class VentanaPaint extends javax.swing.JFrame {
     private javax.swing.JFileChooser FileChooser;
     private javax.swing.JSlider GrosorSlider;
     private javax.swing.JToggleButton Hexagono;
+    private javax.swing.JToggleButton JorgeGoma;
     private javax.swing.JToggleButton JorgePincel;
     private javax.swing.JToggleButton LineaBoton;
     private javax.swing.JMenuBar MenuBar1;
