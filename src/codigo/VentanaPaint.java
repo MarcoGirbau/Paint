@@ -100,6 +100,15 @@ public class VentanaPaint extends javax.swing.JFrame {
             }
         } 
     }
+    public void deSelecciona1()//Void que permite deseleccionar un boton cuando seleccionamos otro
+     {
+        Component[] components = (Component[]) getContentPane().getComponents();
+        for (Component comp : components) {
+            if (comp instanceof JToggleButton) {
+                ((JToggleButton)comp).setSelected(false);
+            }
+        } 
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -806,7 +815,7 @@ public class VentanaPaint extends javax.swing.JFrame {
 
     private void JorgePincelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JorgePincelMousePressed
         formaSeleccionada = 45;
-        deSelecciona();
+        deSelecciona1();
     }//GEN-LAST:event_JorgePincelMousePressed
 
     private void RayadoCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RayadoCheckBoxActionPerformed
@@ -820,7 +829,7 @@ public class VentanaPaint extends javax.swing.JFrame {
 
     private void JorgeGomaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JorgeGomaMousePressed
         formaSeleccionada = 46;
-        deSelecciona();
+        deSelecciona1();
     }//GEN-LAST:event_JorgeGomaMousePressed
 
     /**
