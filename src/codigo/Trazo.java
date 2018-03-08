@@ -20,6 +20,6 @@ public class Trazo extends BasicStroke
     
     public Trazo (int _grosor, float valor1, float valor2)
     {
-        super(_grosor, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, valor1, new float[]{valor2},0.0f);
+        super(_grosor, BasicStroke.CAP_ROUND, BasicStroke.JOIN_MITER, valor1, new float[]{valor2},0.0f);
     }
 }

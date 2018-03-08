@@ -50,7 +50,7 @@ public class VentanaPaint extends javax.swing.JFrame {
     int cancer;
     int sida;
     int campoDeAlgodon;
-    int Amigorio;
+    int amigorio;
     /**
      * Creates new form VentanaPaint
      */
@@ -556,28 +556,32 @@ public class VentanaPaint extends javax.swing.JFrame {
         {
             case 45: 
             campoDeAlgodon = evt.getX();
-            Amigorio = evt.getY();
-            if(cancer != campoDeAlgodon || sida != Amigorio)
+            amigorio = evt.getY();
+            if(cancer != campoDeAlgodon || sida != amigorio)
             {
                 bufferGraphics.setColor(colorSeleccionado);
-                bufferGraphics.drawLine(cancer, sida, campoDeAlgodon, Amigorio);
+                bufferGraphics.setStroke(new Trazo(GrosorSlider.getValue(), 1.0f, 1.0f));
+                bufferGraphics.drawLine(cancer, sida, campoDeAlgodon, amigorio);
                 buffer2Graphics.setColor(colorSeleccionado);
-                buffer2Graphics.drawLine(cancer, sida, campoDeAlgodon, Amigorio);
+                buffer2Graphics.setStroke(new Trazo(GrosorSlider.getValue(), 1.0f, 1.0f));
+                buffer2Graphics.drawLine(cancer, sida, campoDeAlgodon, amigorio);
                 cancer = campoDeAlgodon;
-                sida = Amigorio;
+                sida = amigorio;
             }
             break;
             case 46: 
             campoDeAlgodon = evt.getX();
-            Amigorio = evt.getY();
-            if(cancer != campoDeAlgodon || sida != Amigorio)
+            amigorio = evt.getY();
+            if(cancer != campoDeAlgodon || sida != amigorio)
             {
                 bufferGraphics.setColor(Color.WHITE);
-                bufferGraphics.drawLine(cancer, sida, campoDeAlgodon, Amigorio);
-                buffer2Graphics.setColor(colorSeleccionado);
-                buffer2Graphics.drawLine(cancer, sida, campoDeAlgodon, Amigorio);
+                bufferGraphics.setStroke(new Trazo(GrosorSlider.getValue(), 1.0f, 1.0f));
+                bufferGraphics.drawLine(cancer, sida, campoDeAlgodon, amigorio);
+                buffer2Graphics.setColor(Color.WHITE);
+                buffer2Graphics.setStroke(new Trazo(GrosorSlider.getValue(), 1.0f, 1.0f));
+                buffer2Graphics.drawLine(cancer, sida, campoDeAlgodon, amigorio);
                 cancer = campoDeAlgodon;
-                sida = Amigorio;
+                sida = amigorio;
             }
             break;
             default: 
@@ -618,36 +622,20 @@ public class VentanaPaint extends javax.swing.JFrame {
             case 12: miForma = new Estrella2(evt.getX(), evt.getY(), colorSeleccionado, RellenoCheckBox.isSelected());
             break;
             case 45: 
-            campoDeAlgodon = evt.getX();
-            Amigorio = evt.getY();
-            if(cancer != campoDeAlgodon || sida != Amigorio)
-            {
-                bufferGraphics.setColor(colorSeleccionado);
-                bufferGraphics.drawLine(cancer, sida, campoDeAlgodon, Amigorio);
-                buffer2Graphics.setColor(colorSeleccionado);
-                buffer2Graphics.drawLine(cancer, sida, campoDeAlgodon, Amigorio);
-                cancer = campoDeAlgodon;
-                sida = Amigorio;
-            }
+            cancer = evt.getX();
+            sida = evt.getY();
             break;
             case 46: 
-            campoDeAlgodon = evt.getX();
-            Amigorio = evt.getY();
-            if(cancer != campoDeAlgodon || sida != Amigorio)
-            {
-                bufferGraphics.setColor(Color.WHITE);
-                bufferGraphics.drawLine(cancer, sida, campoDeAlgodon, Amigorio);
-                buffer2Graphics.setColor(colorSeleccionado);
-                buffer2Graphics.drawLine(cancer, sida, campoDeAlgodon, Amigorio);
-                cancer = campoDeAlgodon;
-                sida = Amigorio;
-            }
+            cancer = evt.getX();
+            sida = evt.getY();
             break;
         }
     }//GEN-LAST:event_jPanel1MousePressed
 
     private void jPanel1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseReleased
         //dibuja la forma correspondiente
+      if(formaSeleccionada != 45 && formaSeleccionada != 46)
+      {
       if(RayadoCheckBox.isSelected())
         {
             trazo1 = new BasicStroke(GrosorSlider.getValue(),BasicStroke.CAP_BUTT,BasicStroke.JOIN_MITER,10.0f,  new float[]{10.0f},0.0f);
@@ -657,6 +645,7 @@ public class VentanaPaint extends javax.swing.JFrame {
            //trazo1 = new BasicStroke(GrosorSlider.getValue(),BasicStroke.CAP_BUTT,BasicStroke.JOIN_MITER,10.0f,  new float[]{10.0f},0.0f); 
         }
        miForma.dibujate(buffer2Graphics, evt.getY(),evt.getX(), trazo1);
+      }
     }//GEN-LAST:event_jPanel1MouseReleased
 
     private void jLabel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MousePressed
