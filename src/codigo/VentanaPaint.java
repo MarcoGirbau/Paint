@@ -1,7 +1,7 @@
 /*
  * 2 botones (Color y forma) dentro de ellos sus respectivas cosas (Hecho)
  * Tamaño completo adecuado (Hecho)
- * Boton Jorgepincel (Proceso)
+ * Boton Jorgepincel e JorgeGoma (Hecho)
  * Arreglar guardar figuras(Hecho)
  * Seleccionado de las formas arreglar(Hecho)
  */
@@ -30,7 +30,7 @@ public class VentanaPaint extends javax.swing.JFrame {
     Forma miForma;
     
     Color colorSeleccionado = Color.BLACK; //Color por defecto
-    int formaSeleccionada = 3;  //Si vale 100 pinto circulos
+    int formaSeleccionada = 45;  //Si vale 100 pinto circulos
                                 //Si vale 1 pinto cuadrados
                                 //Si vale 3 pinto triangulos
                                 //Si vale 5 pinto pentagonos 
@@ -54,10 +54,11 @@ public class VentanaPaint extends javax.swing.JFrame {
     /**
      * Creates new form VentanaPaint
      */
-    public VentanaPaint() {//Predefinimos los tamaños de los dialogs
+    public VentanaPaint() {
         initComponents();
         jLabel1.setBackground(Color.ORANGE);
         inicializaBuffers();
+        //Predefinimos los tamaños de los dialogs
         jDialog1.setSize(720, 480);
         jDialog3.setSize(320, 300);
     }
@@ -90,8 +91,8 @@ public class VentanaPaint extends javax.swing.JFrame {
         //pinto el buffer sobre el jFrame
         jPanelGraphics.drawImage(buffer, 0, 0, null);
     }
-    
-    public void deSelecciona()//Void que permite deseleccionar un boton cuando seleccionamos otro
+    //Void que permite deseleccionar un boton cuando seleccionamos otro
+    public void deSelecciona()
      {
         Component[] components = (Component[]) jDialog3.getContentPane().getComponents();
         for (Component comp : components) {
@@ -100,7 +101,8 @@ public class VentanaPaint extends javax.swing.JFrame {
             }
         } 
     }
-    public void deSelecciona1()//Void que permite deseleccionar un boton cuando seleccionamos otro
+    //Void que permite deseleccionar un boton cuando seleccionamos otro
+    public void deSelecciona1()
      {
         Component[] components = (Component[]) getContentPane().getComponents();
         for (Component comp : components) {
@@ -471,6 +473,8 @@ public class VentanaPaint extends javax.swing.JFrame {
         });
 
         JorgePincel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/JorgeCisnerospincel.jpg"))); // NOI18N
+        JorgePincel.setSelected(true);
+        JorgePincel.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         JorgePincel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 JorgePincelMousePressed(evt);
@@ -551,10 +555,10 @@ public class VentanaPaint extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jPanel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseDragged
-        
+        //Permite que eligamos el pincel y la goma
         switch(formaSeleccionada)
         {
-            case 45: 
+            case 45://Pincel 
             campoDeAlgodon = evt.getX();
             amigorio = evt.getY();
             if(cancer != campoDeAlgodon || sida != amigorio)
@@ -569,7 +573,7 @@ public class VentanaPaint extends javax.swing.JFrame {
                 sida = amigorio;
             }
             break;
-            case 46: 
+            case 46://Goma
             campoDeAlgodon = evt.getX();
             amigorio = evt.getY();
             if(cancer != campoDeAlgodon || sida != amigorio)
@@ -590,7 +594,7 @@ public class VentanaPaint extends javax.swing.JFrame {
                 {
                     trazo1 = new BasicStroke(GrosorSlider.getValue(),BasicStroke.CAP_BUTT,BasicStroke.JOIN_MITER,10.0f,  new float[]{10.0f},0.0f);
                 }
-                else
+                else//Dejamos este else vacio 
                 {
                     //trazo1 = new BasicStroke(GrosorSlider.getValue(),BasicStroke.CAP_BUTT,BasicStroke.JOIN_MITER,10.0f,  new float[]{10.0f},0.0f); 
                 }

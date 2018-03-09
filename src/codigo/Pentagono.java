@@ -1,5 +1,5 @@
 /*
- * Esta clase dibuja Pentagonos (intento)
+ * Esta clase dibuja Pentagonos
  */
 package codigo;
 

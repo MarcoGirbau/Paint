@@ -1,5 +1,5 @@
 /*
- * Esta clase dibuja Estrellas
+ * Esta clase dibuja el segundo tipo de estrellas
  */
 package codigo;
 

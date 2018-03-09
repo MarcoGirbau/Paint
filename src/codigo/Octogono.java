@@ -1,5 +1,5 @@
 /*
- * Esta clase dibuja Trinagulos
+ * Esta clase dibuja Octogonos
  */
 package codigo;
 
