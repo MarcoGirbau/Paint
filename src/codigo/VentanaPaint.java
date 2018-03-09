@@ -39,7 +39,9 @@ public class VentanaPaint extends javax.swing.JFrame {
                                 //Si vale 8 pinto octogono
                                 //Si vale 24 pinta estrellas normales
                                 //Si vale 12 pinta segundo tipo de estrellas
+    
     Graphics2D bufferGraphics, buffer2Graphics, jPanelGraphics = null;
+    
     BasicStroke trazo1 = new BasicStroke(15);
     BasicStroke trazo2 = new BasicStroke(15,
                                         BasicStroke.CAP_BUTT,
@@ -47,6 +49,7 @@ public class VentanaPaint extends javax.swing.JFrame {
                                         10.0f, 
                                         new float[]{10.0f}, 
                                         0.0f);
+    //variables para el pincel y la goma
     int cancer;
     int sida;
     int campoDeAlgodon;
@@ -57,7 +60,10 @@ public class VentanaPaint extends javax.swing.JFrame {
     public VentanaPaint() {
         initComponents();
         jLabel1.setBackground(Color.ORANGE);
+        
+        //Inicializamos los Buffers 
         inicializaBuffers();
+        
         //Predefinimos los tamaños de los dialogs
         jDialog1.setSize(720, 480);
         jDialog3.setSize(320, 300);
@@ -67,16 +73,20 @@ public class VentanaPaint extends javax.swing.JFrame {
     {
         //creo una imagen del mismo ancho que alto en el lienzo
         buffer = (BufferedImage)jPanel1.createImage(jPanel1.getWidth(), jPanel1.getHeight());
+        
         //creo una imagen modificable
         bufferGraphics = buffer.createGraphics(); 
+        
         //inicializa el buffer para que sean un rectangulo rojo que ocupe todo el jpanel
         bufferGraphics.setColor(Color.white);
         bufferGraphics.fillRect(0, 0, buffer.getWidth(), buffer.getHeight());
         
         //inicializo el 2º buffer
         buffer2 = (BufferedImage)jPanel1.createImage(jPanel1.getWidth(), jPanel1.getHeight());
+        
         //creo una imagen modificable
         buffer2Graphics = buffer2.createGraphics(); 
+        
         //inicializa el buffer para que sean un rectangulo rojo que ocupe todo el jpanel
         buffer2Graphics.setColor(Color.white);
         buffer2Graphics.fillRect(0, 0, buffer2.getWidth(), buffer2.getHeight());
@@ -91,6 +101,7 @@ public class VentanaPaint extends javax.swing.JFrame {
         //pinto el buffer sobre el jFrame
         jPanelGraphics.drawImage(buffer, 0, 0, null);
     }
+    
     //Void que permite deseleccionar un boton cuando seleccionamos otro
     public void deSelecciona()
      {
@@ -101,6 +112,7 @@ public class VentanaPaint extends javax.swing.JFrame {
             }
         } 
     }
+    
     //Void que permite deseleccionar un boton cuando seleccionamos otro
     public void deSelecciona1()
      {
@@ -638,18 +650,18 @@ public class VentanaPaint extends javax.swing.JFrame {
 
     private void jPanel1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseReleased
         //dibuja la forma correspondiente
-      if(formaSeleccionada != 45 && formaSeleccionada != 46)
-      {
-      if(RayadoCheckBox.isSelected())
+        if(formaSeleccionada != 45 && formaSeleccionada != 46)
         {
-            trazo1 = new BasicStroke(GrosorSlider.getValue(),BasicStroke.CAP_BUTT,BasicStroke.JOIN_MITER,10.0f,  new float[]{10.0f},0.0f);
+            if(RayadoCheckBox.isSelected())
+            {
+                trazo1 = new BasicStroke(GrosorSlider.getValue(),BasicStroke.CAP_BUTT,BasicStroke.JOIN_MITER,10.0f,  new float[]{10.0f},0.0f);
+            }
+            else
+            {
+                //trazo1 = new BasicStroke(GrosorSlider.getValue(),BasicStroke.CAP_BUTT,BasicStroke.JOIN_MITER,10.0f,  new float[]{10.0f},0.0f); 
+            }
+            miForma.dibujate(buffer2Graphics, evt.getY(),evt.getX(), trazo1);
         }
-        else
-        {
-           //trazo1 = new BasicStroke(GrosorSlider.getValue(),BasicStroke.CAP_BUTT,BasicStroke.JOIN_MITER,10.0f,  new float[]{10.0f},0.0f); 
-        }
-       miForma.dibujate(buffer2Graphics, evt.getY(),evt.getX(), trazo1);
-      }
     }//GEN-LAST:event_jPanel1MouseReleased
 
     private void jLabel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MousePressed
